@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.6
 
 from contact import Contact
+import pyperclip
 
 
 def create_contact(fname, lname, phone, email):
@@ -41,7 +42,7 @@ def main():
     print('\n')
 
     while True:
-        print("Use these three short codes : cc - create a new contact, dc - display contact. fc - find contact, ex - exit the contact list, del - delete contact, ex - exit ")
+        print("Use these three short codes : cc - create a new contact, dc - display contact. fc - find contact, ex - exit, del - delete contact, co - copy contact ")
 
         short_code = input().lower()
 
@@ -73,7 +74,8 @@ def main():
                 print('\n')
 
                 for contact in display_contacts():
-                    print(f"{contact.first_name} ....{contact.last_name}")
+                    print(f"Name: {contact.first_name} {contact.last_name}")
+                    print(f"Phone: {contact.phone_number}")
                     print('\n')
             else:
                 print('\n')
@@ -135,6 +137,42 @@ def main():
 
             else:
                 print('\n')
+
+        elif short_code == 'co':
+            print("Enter the number of the contact you want to copy")
+
+            searched_number = input()
+
+            if check_existing_contacts(searched_number):
+                searched_contact = find_contact(searched_number)
+                print(
+                    f"{searched_contact.first_name} {searched_contact.last_name}")
+                print('-' * 20)
+
+                print(
+                    f"Phone number.......{searched_contact.phone_number}")
+                print(f"Email address.......{searched_contact.email}")
+
+                print('\n')
+                print(" Is that the contact you want to copy? Type y or n.")
+
+                answer_two = input()
+
+                if answer_two == 'y':
+                    pyperclip.copy(searched_contact.phone_number)
+                    
+                    print(f"The copied contact is: {searched_contact.phone_number} ")
+                    # searched_contact.phone_number, pyperclip.paste()
+                   
+                else:
+                    print('\n')
+
+            else:
+                print("That contact does not exist")
+
+        elif short_code == "ex":
+            print("Bye .......")
+            break
 
         else:
             print("I really didn't get that. Please use the short codes")
