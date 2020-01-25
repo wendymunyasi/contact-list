@@ -74,7 +74,6 @@ def main():
 
                 for contact in display_contacts():
                     print(f"{contact.first_name} ....{contact.last_name}")
-
                     print('\n')
             else:
                 print('\n')
@@ -122,7 +121,7 @@ def main():
                     print(f"Email address.......{searched_contact.email}")
 
                     print('\n')
-                    print(" Is this the contact you want to delete? Type y or n.")
+                    print(" Is that the contact you want to delete? Type y or n.")
 
                     answer_two = input()
 
